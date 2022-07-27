@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VServe Restaurant</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 40%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+      }
+
+      /* Add Animation */
+      @-webkit-keyframes animatetop {
+        from {
+          top: -300px;
+          opacity: 0;
+        }
+        to {
+          top: 0;
+          opacity: 1;
+        }
+      }
+
+      @keyframes animatetop {
+        from {
+          top: -300px;
+          opacity: 0;
+        }
+        to {
+          top: 0;
+          opacity: 1;
+        }
+      }
+
+      /* The Close Button */
+      .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .modal-header {
+        padding: 2px 16px;
+        height: 40px;
+        background-color: #1f50bb;
+        color: white;
+      }
+
+      .modal-body {
+        padding: 2px 16px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+      }
+
+      .modal-footer {
+        padding: 2px 16px;
+        background-color: white;
+        color: black;
+      }
+
+      /* To remove scrollbar */
+      ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #b2ab8c;
+      }
+
+      #main {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+      #tableSection {
+        width: 25%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        position: relative;
+        height: 969px;
+      }
+      #line {
+        width: 2px;
+        margin-right: 2px;
+        background-color: #000;
+      }
+      #menuSection {
+        width: 75%;
+      }
+
+      #menu {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        position: relative;
+        height: 969px;
+        margin-left: 2%;
+      }
+
+      .card {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        box-shadow: 3px 4px 6px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      #menuCard {
+        box-shadow: 3px 2px 3px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 15px;
+      }
+
+      .form-outline {
+        text-align: left;
+        margin-left: 30px;
+        margin-right: 30px;
+        padding: 3px;
+        box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+      }
+
+      #menuSection .input-group .form-outline {
+        margin-left: 60px;
+        width: 500px;
+      }
+
+      .card-text {
+        color: rgba(95, 95, 95, 0.945);
+      }
+
+      #Table-1modalBill-header {
+        background-color: #28a745;
+      }
+      #Table-2modalBill-header {
+        background-color: #28a745;
+      }
+      #Table-3modalBill-header {
+        background-color: #28a745;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="tableSection">
+        <h3 id="tableHeading">Tables</h3>
+        <div class="input-group">
+          <div class="form-outline">
+            <input
+              type="text"
+              id="tableSearch"
+              name="tableSearch"
+              class="form-control"
+              onkeyup="searchTable()"
+            />
+            <label class="form-label" for="tableSearch">Search Table</label>
+          </div>
+        </div>
+        <hr />
+        <div id="data2"></div>
+      </div>
+
+      <div id="line"></div>
+
+      <div id="menuSection">
+        <h3 id="menuHeading">Menu</h3>
+        <div class="input-group">
+          <div class="form-outline">
+            <input
+              type="text"
+              id="menuSearch"
+              name="menuSearch"
+              class="form-control"
+              onkeyup="searchMenu()"
+            />
+            <label class="form-label" for="tableSearch">Search Menu</label>
+          </div>
+        </div>
+        <hr />
+        <div id="data"></div>
+      </div>
+    </div>
+
+    <script src="menu.js"></script>
+    <script src="tableFunctions.js"></script>
+    <script src="table.js"></script>
+    <!-- <script src="table1.js"></script>
+    <script src="table2.js"></script>
+    <script src="table3.js"></script> -->
+  </body>
+</html>
